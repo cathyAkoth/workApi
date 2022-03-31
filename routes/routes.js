@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const productController = require("../controllers/controller");
+const candidateController = require("../controllers/controller");
 
 /**
  * @swagger
@@ -137,7 +137,7 @@ const productController = require("../controllers/controller");
     
  /**
  * @swagger
- * /candidateVerification/add:
+ * /candidateVerification/:
  *   post:
  *     summary: creates a new verification
  *     tags: [CandidateVerification]
@@ -160,7 +160,7 @@ const productController = require("../controllers/controller");
   
 
 
-router.post("/",  productController.createProduct);
+router.post("/",  candidateController.createCandidate);
 
 /**
  * @swagger
@@ -188,11 +188,11 @@ router.post("/",  productController.createProduct);
 
 
 
-router.get("/:id", productController.getProductById);
+router.get("/:id", candidateController.getCandidateById);
 
 /**
  * @swagger
- * /agentVerification/delete/{id}:
+ * /candidateVerification/{id}:
  *   delete:
  *     summary: Remove the candidateVerification by id
  *     tags: [CandidateVerification]
@@ -213,12 +213,12 @@ router.get("/:id", productController.getProductById);
 
 
 
-router.delete("/:id", productController.removeProduct);
+router.delete("/:id", candidateController.removeCandidate);
 
 
 /**
  * @swagger
- * /products/update/{id}:
+ * /candidateVerification/{id}:
  *  put:
  *    summary: Update the candidateVerification by the id
  *    tags: [CandidateVerification]
@@ -248,7 +248,7 @@ router.delete("/:id", productController.removeProduct);
  *        description: Some error happened
  */
 
-router.put('/:id', productController.updateProductById);
+router.put('/:id', candidateController.updateCandidateById);
     
   
 

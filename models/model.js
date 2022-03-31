@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const productSchema = mongoose.Schema({
+const CandidateSchema = mongoose.Schema({
   image: {
     type : String,
 
@@ -109,5 +109,5 @@ const productSchema = mongoose.Schema({
     default: Date.now()
 }
 });
-const Product = mongoose.model("Product", productSchema);
-module.exports = Product;
+const Candidate = mongoose.model("candidate", CandidateSchema);
+module.exports = Candidate;

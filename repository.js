@@ -1,17 +1,17 @@
-const Product = require("./models/model");
-exports.products = async () => {
-    const products = await Product.find();
-    return products;
+const Candidate = require("./models/model");
+exports.candidates = async () => {
+    const candidates = await Candidate.find();
+    return candidates;
 };
-exports.productById = async id => {
-    const product = await Product.findById(id);
-    return product;
+exports.candidateById = async id => {
+    const candidate = await Candidate.findById(id);
+    return candidate;
 }
-exports.createProduct = async candidate => {
-    const newProduct = await Product.create(candidate);
-    return newProduct
+exports.createCandidate = async candidate => {
+    const newCandidate = await Candidate.create(candidate);
+    return newCandidate
 }
-exports.removeProduct = async id => {
-    const product = await Product.findByIdAndRemove(id);
-    return product
+exports.removeCandidate = async id => {
+    const candidate = await Candidate.findByIdAndRemove(id);
+    return candidate
 }

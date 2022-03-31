@@ -1,5 +1,5 @@
-const productRepository = require('../repository')
-exports.createProduct = async (req, res) => {
+const candidateRepository = require('../repository')
+exports.createCandidate = async (req, res) => {
     try {
         let candidate = {
             firstName: req.body.firstName,
@@ -12,12 +12,12 @@ exports.createProduct = async (req, res) => {
             price: req.body.price,
             // image: req.file.path
         }
-        let product = await productRepository.createProduct({
+        let candidates = await candidateRepository.createCandidate({
             ...candidate
         });
         res.status(200).json({
             status: true,
-            data: product,
+            data: candidates,
         })
     } catch (err) {
         console.log(err)
@@ -27,12 +27,12 @@ exports.createProduct = async (req, res) => {
         })
     }
 }
-exports.getProducts = async (req, res) => {
+exports.getCandidates = async (req, res) => {
     try {
-        let products = await productRepository.products();
+        let candidates = await candidateRepository.candidates();
         res.status(200).json({
             status: true,
-            data: products,
+            data: candidates,
         })
     } catch (err) {
         console.log(err)
@@ -43,13 +43,13 @@ exports.getProducts = async (req, res) => {
     }
 }
 
-exports.getProductById = async (req, res) => {
+exports.getCandidateById = async (req, res) => {
     try {
         let id = req.params.id
-        let productDetails = await productRepository.productById(id);
+        let candidateDetails = await candidateRepository.candidateById(id);
         res.status(200).json({
             status: true,
-            data: productDetails,
+            data: candidateDetails,
         })
     } catch (err) {
         res.status(500).json({
@@ -59,28 +59,28 @@ exports.getProductById = async (req, res) => {
     }
 }
 
-exports.updateProductById = async(req, res) => {
+exports.updateCandidateById = async(req, res) => {
     
     let {id} = req.params
-    let productDetails = await productRepository.productById(id);
-    if(!productDetails) {
+    let candidateDetails = await candidateRepository.candidateById(id);
+    if(!candidateDetails) {
         return res.status(404).json({
             message: "verification not found"
         }) 
     }
-    await productRepository(id);
+    await candidateRepository(id);
     return res.json({
         message: "candidate verification  updated successfully"
     })
 }
 
-exports.removeProduct = async (req, res) => {
+exports.removeCandidate = async (req, res) => {
     try {
         let id = req.params.id
-        let productDetails = await productRepository.removeProduct(id)
+        let candidateDetails = await candidateRepository.removeCandidate(id)
         res.status(200).json({
             status: true,
-            data: productDetails,
+            data: candidateDetails,
         })
     } catch (err) {
         res.status(500).json({

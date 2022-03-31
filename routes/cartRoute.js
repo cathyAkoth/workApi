@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const cartController = require("../controllers/cartcontroller");
+const shortlistController = require("../controllers/cartcontroller");
 
 
 
@@ -68,7 +68,7 @@ const cartController = require("../controllers/cartcontroller");
  */
 
 
-router.get("/", cartController.getCart);
+router.get("/", shortlistController.getShortlist);
 
 
 
@@ -96,7 +96,7 @@ router.get("/", cartController.getCart);
  *         description: Some server error
  */
   
-router.post("/", cartController.addItemToCart);
+router.post("/", shortlistController.addItemToShortlist);
 
 /**
  * @swagger
@@ -119,5 +119,5 @@ router.post("/", cartController.addItemToCart);
  *         description: The shortlist was not found
  */
 
-router.delete("/empty-cart", cartController.emptyCart);
+router.delete("/", shortlistController.emptyShortlist);
 module.exports = router;
