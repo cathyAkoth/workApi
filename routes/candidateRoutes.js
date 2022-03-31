@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const candidateController = require("../controllers/controller");
+const candidateController = require("../controllers/candidateController");
 
 /**
  * @swagger

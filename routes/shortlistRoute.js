@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const shortlistController = require("../controllers/cartcontroller");
+const shortlistController = require("../controllers/shortlistController");
 
 
 
