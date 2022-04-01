@@ -53,8 +53,7 @@ const multerInstance = require('../multer')
  *         
  *         description:
  *           type: string
- *         fil:
- *           type: string
+ *        
  *         position:
  *           type: string
  *         price:
@@ -175,19 +174,26 @@ const multerInstance = require('../multer')
 /**
  * @swagger
  * /candidateVerification:
- *   get:
- *     summary: Returns the list of all candidates Verified
+ *   post:
+ *     summary: creates a new verification
  *     tags: [CandidateVerification]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/candidateVerification'
  *     responses:
  *       200:
- *         description: The list of all candidates verified
+ *         description: The candidate was successfully verified
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/candidateVerification'
+ *               $ref: '#/components/schemas/candidateVerification'
+ *       500:
+ *         description: Some server error
  */
+  
   var storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/images');

@@ -46,7 +46,7 @@ const EmployerCompanyController = require('../controllers/employerCompany.contro
  * @swagger
  * /employer/company:
  *   get:
- *     summary: Returns the list of all Agents verified
+ *     summary: Returns the list of all employer company verified
  *     tags: [employerVerification]
  *     responses:
  *       200:
@@ -228,7 +228,7 @@ router.put('/:id/update', async(req, res) => {
  *         schema:
  *           type: string
  *         required: true
- *         description: The AgentemployerVerified id
+ *         description: The employerVerified id
  * 
  *     responses:
  *       200:
