@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 let ItemSchema = new Schema({
     candidateId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
+        ref: "candidate",
     },
     quantity: {
         type: Number,

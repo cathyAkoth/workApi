@@ -28,6 +28,12 @@ const employerCompanySchema = new mongoose.Schema({
     phoneNumber: {
         type: String
     },
+    exportLicenseUpload:{
+        type: String
+    },
+    incorporationCertificateUpload:{
+        type: String
+    },
     createdAt: {
         type: Date,
         default: Date.now()

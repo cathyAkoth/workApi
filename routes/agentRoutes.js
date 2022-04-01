@@ -212,7 +212,7 @@ router.put('/update/id', async(req, res) => {
  * /agentVerification/delete/{id}:
  *   delete:
  *     summary: Remove the agent by id
- *     tags: [Shortlist]
+ *     tags: [AgentVerification]
  *     parameters:
  *       - in: path
  *         name: id

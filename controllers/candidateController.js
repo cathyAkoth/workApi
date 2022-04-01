@@ -1,4 +1,6 @@
 const candidateRepository = require('../repository')
+const multer = require('multer')
+
 
 
 exports.createCandidate = async (req, res) => {
@@ -6,13 +8,15 @@ exports.createCandidate = async (req, res) => {
         let candidate = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            image: req.body.image,
+            // image: req.body.image,
             nationality: req.body.nationality,
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
 
             price: req.body.price,
-            // image: req.file.path
+            image: req.file.path,
+            fil: req.file.path,
+            
         }
         let candidates = await candidateRepository.createCandidate({
             ...candidate
@@ -47,6 +51,7 @@ exports.getCandidates = async (req, res) => {
 
 exports.getCandidateById = async (req, res) => {
     try {
+        
         let id = req.params.id
         let candidateDetails = await candidateRepository.candidateById(id);
         res.status(200).json({

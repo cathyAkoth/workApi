@@ -47,6 +47,9 @@ const CandidateSchema = mongoose.Schema({
   passport : {
       type : String,
   },
+  passportUpload:{
+      type: String,
+  },
   workExperience: {
       type : String,
   },
@@ -57,9 +60,8 @@ const CandidateSchema = mongoose.Schema({
       type :String,
   },
   
-  fil : {
-      type: String,
-  },
+    
+
   position: {
       type: String,
   },
@@ -76,7 +78,7 @@ const CandidateSchema = mongoose.Schema({
   video: {
       type: String,
   },
-  nationalId: {
+  nationalIdUpload: {
       type: String
   },
   dayOff: {

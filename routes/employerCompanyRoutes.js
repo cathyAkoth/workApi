@@ -1,4 +1,5 @@
-const router  = require('express').Router()
+const router  = require('express').Router();
+const multer = require('multer');
 const EmployerCompanyController = require('../controllers/employerCompany.controller')
 
 /**
@@ -27,7 +28,10 @@ const EmployerCompanyController = require('../controllers/employerCompany.contro
  *             type: string
  *         phoneNumber:
  *              type: string
- * 
+ *         exportLicenseUpload:             
+ *               type: string
+ *          incorporationCertificateUpload:
+ *               type: string
  *       
  */
 
@@ -108,15 +112,24 @@ router.get('', async(req, res) => {
  *       500:
  *         description: Some server error
  */
-
-router.post('/add', async (req, res) => {
-    let data = req.body;
-    let employerCompany = await EmployerCompanyController.addEmployerCompany(data)
-    
-    return res.status(201).json({
-        message: employerCompany
+//  var storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'public/images');
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.originalname);
+//     }
+//     });
+//     var upload = multer({ storage: storage })
+  
+    router.post('/add', async (req, res) => {
+        let data = req.body;
+        let employerCompany = await EmployerCompanyController.addEmployerCompany(data)
+        
+        return res.status(201).json({
+            message: employerCompany
+        })
     })
-})
 
 /**
  * @swagger

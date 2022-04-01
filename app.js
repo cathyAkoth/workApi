@@ -67,7 +67,8 @@ app.use(bodyParser.urlencoded({extended: true }))
 
 // Middleware for serving static files.
 app.use(express.static('public'));
-app.use('/public/images', express.static(__dirname + '/public/images'));
+
+ app.use('/public/files', express.static(__dirname + '/public/files'));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 

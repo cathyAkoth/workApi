@@ -1,5 +1,9 @@
 const router = require("express").Router();
+const multer = require("multer");
+const fs = require('fs')
 const candidateController = require("../controllers/candidateController");
+
+const multerInstance = require('../multer')
 
 /**
  * @swagger
@@ -42,7 +46,8 @@ const candidateController = require("../controllers/candidateController");
  *            type: string
  *         passport: 
  *             type: string
- 
+ *         passportUpload:
+ *             type: string
  *         workExperience:
  *            type: string
  *         
@@ -54,13 +59,14 @@ const candidateController = require("../controllers/candidateController");
  *           type: string
  *         price:
  *            type: string
+ *            description: expected salary
  *         jobLocation: 
  *             type: string
  *         
  *         video:
  *           type: string
  *           
- *         nationalId:
+ *         nationalIdUpload:
  *           type: string
  *         dayOff:
  *           type: string
@@ -132,35 +138,99 @@ const candidateController = require("../controllers/candidateController");
  *               items:
  *                 $ref: '#/components/schemas/candidateVerification'
  */
-
-
+ router.get("/", candidateController.getCandidates);
     
- /**
+/**
+  * @swagger
+  * tags:
+  *   name: CandidateVerification
+  *   
+  */
+
+/**
  * @swagger
- * /candidateVerification/:
- *   post:
- *     summary: creates a new verification
+ * /candidateVerification:
+ *   get:
+ *     summary: Returns the list of allcandidates verified
  *     tags: [CandidateVerification]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/candidateVerification'
  *     responses:
  *       200:
- *         description: The candidate was successfully verified
+ *         description: The list of the candidates verified
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/candidateVerification'
- *       500:
- *         description: Some server error
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/candidateVerification'
  */
+
+ 
+ /**
+  * @swagger
+  * tags:
+  *   name: CandidateVerification
+  *   
+  */
+
+/**
+ * @swagger
+ * /candidateVerification:
+ *   get:
+ *     summary: Returns the list of all candidates Verified
+ *     tags: [CandidateVerification]
+ *     responses:
+ *       200:
+ *         description: The list of all candidates verified
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/candidateVerification'
+ */
+  var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+    });
+    var upload = multer({ storage: storage })
+  router.post("/", upload.single('image'), candidateController.createCandidate);
+
+  // const storage = multer.diskStorage({
+  //   destination: (req, file, cb) => { cb(null, 'public/images') },
+  // var filenames = req.files.map(function(file) {
+  //   return file.filename; // or file.originalname
+  // });
+  //   filename: (req, file, cb) => { cb(null, file.originalname) }, })
+  //   var upload = multer({ storage: storage })
+    
+  //   router.post("/", upload.fields([
+  //     { name: "image", maxCount: 1 },
+  //     { name: "fil", maxCount: 1 },]), candidateController.createCandidate);
+
+
+  // const storage = multer.diskStorage({
+  //     destination: (req, file, cb) => { cb(null, 'public/images') },
+  //     filename: function (req, file, cb) {
+  //       let extArray = file.mimetype.split("/");
+  //   let extension = extArray[extArray.length - 1];
+  //   cb(null, file.fieldname + '-' + Date.now()+ '.' +extension)
+  //     }
+  // })
   
-
-
-router.post("/",  candidateController.createCandidate);
+  //     var upload = multer({ storage: storage })
+      
+  //     router.post("/", upload.fields([
+  //       { name: "image", maxCount: 1 },
+  //       { name: "fil", maxCount: 1 },]), candidateController.createCandidate);
+    
+    // router.post("/", upload.single('image'), candidateController.createCandidate);
+  
+  
+  // router.post("/", multerInstance.upload.single('image'), candidateController.createCandidate); 
 
 /**
  * @swagger
@@ -185,7 +255,6 @@ router.post("/",  candidateController.createCandidate);
  *       404:
  *         description: The CandidateVerification was not found
  */
-
 
 
 router.get("/:id", candidateController.getCandidateById);
@@ -250,7 +319,7 @@ router.delete("/:id", candidateController.removeCandidate);
 
 router.put('/:id', candidateController.updateCandidateById);
     
-  
+
 
 
 module.exports = router;
